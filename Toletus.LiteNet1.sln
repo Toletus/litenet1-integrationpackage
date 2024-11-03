@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toletus.LiteNet1", "src\Toletus.LiteNet1\Toletus.LiteNet1.csproj", "{976F889D-CA8A-4BA4-8C0B-6B79B9C5B966}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{976F889D-CA8A-4BA4-8C0B-6B79B9C5B966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976F889D-CA8A-4BA4-8C0B-6B79B9C5B966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976F889D-CA8A-4BA4-8C0B-6B79B9C5B966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976F889D-CA8A-4BA4-8C0B-6B79B9C5B966}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
