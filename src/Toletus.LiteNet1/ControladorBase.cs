@@ -133,11 +133,11 @@ public class ControladorBase : IDisposable
                     if (feed.Protocolo == ProtocoloEnum.Tcp)
                     {
                         if (feed.Comando != "qry") Logger.Debug($"LiteNet1 {nameof(feed.Comando)} {feed.Comando} {nameof(feed.LiteNet.IpEndPoint)} {feed.LiteNet.IpEndPoint} {nameof(feed.LiteNet.Id)} {feed.LiteNet.Id}  {nameof(feed.LiteNet.Tag)} {feed.LiteNet.Tag}");
-                        ret = SocketUtil.SendCommand(feed.Cmd, feed.LiteNet.IpEndPoint);
+                        ret = SocketUtils.SendCommand(feed.Cmd, feed.LiteNet.IpEndPoint);
                     }
                     else
                     {
-                        var udp = new UdpUtil();
+                        var udp = new UdpUtils();
                         ret = udp.EnviarEAguardar(feed.Cmd, FaixaIp, 1001);
                     }
 

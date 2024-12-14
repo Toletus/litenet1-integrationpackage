@@ -49,7 +49,7 @@ public class Controlador : ControladorBase
 
     private bool AcharDispositivos(IPAddress faixaIP)
     {
-        var udp = new UdpUtil();
+        var udp = new UdpUtils();
         udp.OnRetorno += Udp_OnRetorno;
         udp.Enviar("prc", faixaIP, 1001);
 

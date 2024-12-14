@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Toletus.LiteNet1.Utils;
 
-public class UdpUtil
+public class UdpUtils
 {
     private Socket _sock;
     private byte[] _buffer;
@@ -15,7 +15,7 @@ public class UdpUtil
     // event declaration 
     public event RetornoHandler OnRetorno;
 
-    public UdpUtil()
+    public UdpUtils()
     {
         using var udpClient = new UdpClient(7879);
         udpClient.Close();

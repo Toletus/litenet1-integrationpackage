@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Toletus.LiteNet1.Utils;
 
-public class SocketUtil
+public class SocketUtils
 {
     internal static int TimeOut = 5000;
 
