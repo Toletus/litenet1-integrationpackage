@@ -1,16 +1,14 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
-namespace Toletus.LiteNet1;
+namespace Toletus.LiteNet1.Utils;
 
 public class SocketUtil
 {
     internal static int TimeOut = 5000;
 
-    internal static void Send(Socket socket, byte[] buffer, int offset, int size, int timeout)
+    public static void Send(Socket socket, byte[] buffer, int offset, int size, int timeout)
     {
         var startTickCount = Environment.TickCount;
         var sent = 0;  // how many bytes is already sent
@@ -39,7 +37,7 @@ public class SocketUtil
         } while (sent < size);
     }
 
-    internal static byte[] Receive(Socket socket, int timeout)
+    public static byte[] Receive(Socket socket, int timeout)
     {
         socket.ReceiveTimeout = 1000;
             
@@ -77,7 +75,7 @@ public class SocketUtil
         return buffer;
     }
 
-    internal static byte[] SendCommand(byte[] comando, IPEndPoint endPoint)
+    public static byte[] SendCommand(byte[] comando, IPEndPoint endPoint)
     {
         try
         {

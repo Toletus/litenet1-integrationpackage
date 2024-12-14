@@ -7,6 +7,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using Toletus.LiteNet1.Enums;
+using Toletus.LiteNet1.Utils;
 
 namespace Toletus.LiteNet1;
 
@@ -18,13 +19,13 @@ public class LiteNet : LiteNetBase
     public string MensagemPadrao
     {
         get => _mensagemPadrao;
-        set => _mensagemPadrao = Util.CortarPreencher(value, 16, ' ', false);
+        set => _mensagemPadrao = StringUtils.CortarPreencher(value, 16, ' ', false);
     }
 
     public string MensagemSecundaria
     {
         get => _mensagemSecundaria;
-        set => _mensagemSecundaria = Util.CortarPreencher(value, 16, ' ', false);
+        set => _mensagemSecundaria = StringUtils.CortarPreencher(value, 16, ' ', false);
     }
 
     public bool Mudo { get; set; }
@@ -168,7 +169,7 @@ public class LiteNet : LiteNetBase
         if (ExibirRelogio)
         {
             comando = Encoding.ASCII.GetBytes("srlXHHMMSS");
-            Array.Copy(Util.Hora, 0, comando, 4, 6);
+            Array.Copy(StringUtils.HoraBytes, 0, comando, 4, 6);
         }
         else
             comando = Encoding.ASCII.GetBytes("srlX");

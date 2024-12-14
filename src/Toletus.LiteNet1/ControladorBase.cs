@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Threading;
 using Toletus.LiteNet1.Enums;
+using Toletus.LiteNet1.Utils;
 
 namespace Toletus.LiteNet1;
 
@@ -118,7 +119,7 @@ public class ControladorBase : IDisposable
                         {
                             var cmd = new byte[9];
                             Array.Copy(QryCmd, cmd, 3);
-                            Array.Copy(Util.Hora, 0, cmd, 3, 6);
+                            Array.Copy(StringUtils.HoraBytes, 0, cmd, 3, 6);
                             feed.Cmd = cmd;
                             feed.LiteNet.IntervaloHora = 0;
                         }
@@ -142,7 +143,7 @@ public class ControladorBase : IDisposable
 
                     if (ret != null && ret.Length > 0)
                     {
-                        s = Util.ByteArrayToString(ret); // avaliar mudar isso aqui, não precisar de converter em string toda vez.
+                        s = StringUtils.ByteArrayToString(ret); // avaliar mudar isso aqui, não precisar de converter em string toda vez.
 
                         if (feed != null) // não é qry
                         {

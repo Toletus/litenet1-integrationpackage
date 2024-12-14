@@ -9,4 +9,8 @@
     <PackageReference Include="NLog" Version="5.2.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Toletus.LiteNet1.Utils\Toletus.LiteNet1.Utils.csproj" />
+  </ItemGroup>
+
 </Project>

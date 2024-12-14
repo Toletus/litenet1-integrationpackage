@@ -1,10 +1,8 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
-namespace Toletus.LiteNet1;
+namespace Toletus.LiteNet1.Utils;
 
 public class UdpUtil
 {
@@ -19,18 +17,16 @@ public class UdpUtil
 
     public UdpUtil()
     {
-        using (var udpClient = new UdpClient(7879))
-        {
-            udpClient.Close();
-        }
+        using var udpClient = new UdpClient(7879);
+        udpClient.Close();
     }
 
-    internal int Enviar(string comando, IPAddress faixaIP, int porta)
+    public int Enviar(string comando, IPAddress faixaIP, int porta)
     {
         return Enviar(Encoding.ASCII.GetBytes(comando), faixaIP, porta);
     }
 
-    internal int Enviar(byte[] cmd, IPAddress faixaIP, int porta)
+    public int Enviar(byte[] cmd, IPAddress faixaIP, int porta)
     {
         //https://acrocontext.wordpress.com/2013/08/15/c-simple-udp-listener-in-asynchronous-way/
         EndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, porta);

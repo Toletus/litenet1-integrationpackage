@@ -1,4 +1,5 @@
 ﻿using System;
+using Toletus.LiteNet1.Utils;
 
 namespace Toletus.LiteNet1;
 
@@ -14,7 +15,7 @@ public class Feed
         get
         {
             if (_comando == null && _cmd != null)
-                _comando = Util.ByteArrayToString(_cmd);
+                _comando = StringUtils.ByteArrayToString(_cmd);
 
             return _comando;
         }

@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Toletus.LiteNet1.Enums;
+using Toletus.LiteNet1.Utils;
 
 namespace Toletus.LiteNet1;
 
@@ -39,7 +40,7 @@ public class Controlador : ControladorBase
 
         foreach (var faixa in faixasIp)
         {
-            var ip = Util.ObterIpAddressPorNomeDaRede(faixa) ?? IPAddress.Parse(faixa);
+            var ip = NetworkUtils.ObterIpAddressPorNomeDaRede(faixa) ?? IPAddress.Parse(faixa);
 
             AcharDispositivos(ip);
             FaixaIp = ip;
@@ -57,7 +58,7 @@ public class Controlador : ControladorBase
 
     private void Udp_OnRetorno(EndPoint endPoint, byte[] retorno)
     {
-        var ret = Util.ByteArrayToString(retorno);
+        var ret = StringUtils.ByteArrayToString(retorno);
 
         if (!ret.StartsWith("Toletus")) return;
 
