@@ -32,10 +32,12 @@ jobs:
       - name: Build with dotnet
         run: |
           dotnet build "src/Toletus.LiteNet1/Toletus.LiteNet1.csproj" --configuration Release -p:Version=${{ env.version }}
+          #dotnet build "src/Toletus.LiteNet1.Utils/Toletus.LiteNet1.Utils.csproj" --configuration Release -p:Version=${{ env.version }}
 
       - name: Create the Package
         run: |
           dotnet pack "src/Toletus.LiteNet1/Toletus.LiteNet1.csproj" --configuration Release /p:PackageVersion=${{ env.version }}  #-beta
+          #dotnet pack "src/Toletus.LiteNet1.Utils/Toletus.LiteNet1.Utils.csproj" --configuration Release /p:PackageVersion=${{ env.version }} #-beta
 
       - name: Publish Toletus.LiteNet1 on Nuget
         run: |
