@@ -12,6 +12,7 @@ public class LiteNetBase
      * */
 
     internal IPEndPoint IpEndPoint;
+
     //protected Socket _socket;
     protected Controlador _controlador;
 
@@ -19,6 +20,8 @@ public class LiteNetBase
     /// Endereço MAC do dispositivo
     /// </summary>
     public byte[] Mac { get; }
+
+    public bool Iniciada { get; private set; }
 
     protected LiteNetBase(Controlador controlador, int id, string ip, int porta, byte[] mac)
     {
@@ -29,24 +32,22 @@ public class LiteNetBase
         IpEndPoint = new IPEndPoint(IPAddress.Parse(ip), porta);
 
         Mac = mac;
-            
+
         IntervaloHora = 99;
     }
 
     internal int IntervaloHora { get; set; }
 
-    internal void Iniciar()
+    public void Iniciar()
     {
-        ///
-        /// avaliar a necessidade e desenvolver 
-        ///
+        _controlador.Carregar(_controlador.FaixasIp);
+
+        Iniciada = Status.Equals("OK");
     }
 
-    internal void Encerrar()
+    public void Encerrar()
     {
-        ///
-        /// desenvolver 
-        ///
+        _controlador.Dispose();
     }
 
     /// <summary>
@@ -63,6 +64,11 @@ public class LiteNetBase
     /// Retorna o IP do dispositivo
     /// </summary>
     public string IP => IpEndPoint.Address.ToString();
+    
+    /// <summary>
+    /// Retorna a porta do dispositivo
+    /// </summary>
+    public int Porta => IpEndPoint.Port;
 
     /// <summary>
     /// Retorna a faixa da rede do dispositivo
@@ -79,7 +85,8 @@ public class LiteNetBase
     /// </summary>
     public string MascaraSubRede { get; set; }
 
-    protected Feed EnviarComando(string comando, bool aguardarRetorno = false, ProtocoloEnum protocolo = ProtocoloEnum.Tcp)
+    protected Feed EnviarComando(string comando, bool aguardarRetorno = false,
+        ProtocoloEnum protocolo = ProtocoloEnum.Tcp)
     {
         return EnviarComando(Encoding.ASCII.GetBytes(comando), aguardarRetorno, protocolo);
     }
@@ -88,7 +95,8 @@ public class LiteNetBase
 
     protected Feed EnviarComando(byte[] cmd, bool aguardarRetorno = false, ProtocoloEnum protocolo = ProtocoloEnum.Tcp)
     {
-        var feed = new Feed { ID = _controlador.Feeds.Count, Cmd = cmd, LiteNet = (LiteNet)this, Protocolo = protocolo };
+        var feed = new Feed
+            { ID = _controlador.Feeds.Count, Cmd = cmd, LiteNet = (LiteNet)this, Protocolo = protocolo };
 
         _controlador.Feeds.Add(feed);
 

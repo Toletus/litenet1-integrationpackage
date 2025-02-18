@@ -75,8 +75,9 @@ public class LiteNet : LiteNetBase
         return contadores;
     }
 
-    public string SetarControleFluxo() // rever para talvez esse método incluir setar modo entrada;
+    public string SetarControleFluxo(ModoFluxo controleFluso) // rever para talvez esse método incluir setar modo entrada;
     {
+        ControleFluxo = controleFluso;
         var comando = Encoding.ASCII.GetBytes("stmX"); // renomear para smf
 
         comando[3] = (byte)ControleFluxo;
@@ -96,8 +97,9 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public string SetarSentidoEntrada() // rever renomear comando para; setar sentido entrada e incluí-lo no setar fluxo;
+    public string SetarSentidoEntrada(bool entradaSentidoHorario) // rever renomear comando para; setar sentido entrada e incluí-lo no setar fluxo;
     {
+        EntradaSentidoHorario = entradaSentidoHorario;
         var comando = Encoding.ASCII.GetBytes("sseX");
 
         comando[3] = (byte)(EntradaSentidoHorario ? 1 : 0);
@@ -129,7 +131,7 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public Feed GetID(bool aguardarRetorno = false)
+    public Feed GetId(bool aguardarRetorno = false)
     {
         var feed = EnviarComando(@"gid", aguardarRetorno);
             
@@ -142,8 +144,9 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public string SetID()
+    public string SetId(int id)
     {
+        Id = id;
         var comando = Encoding.ASCII.GetBytes("sidX");
 
         comando[3] = (byte)Id;
@@ -152,8 +155,9 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public string SetMudo()
+    public string SetMudo(bool mudo)
     {
+        Mudo = mudo;
         var comando = Encoding.ASCII.GetBytes("smtX");
 
         comando[3] = (byte)(Mudo ? 1 : 0);
@@ -180,8 +184,9 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public string SetContador()
+    public string SetContador(bool exibirContador)
     {
+        ExibirContador = exibirContador;
         var comando = Encoding.ASCII.GetBytes("sctX");
 
         comando[3] = (byte)(ExibirContador? 1 : 0);
@@ -190,8 +195,30 @@ public class LiteNet : LiteNetBase
         return feed.Retorno;
     }
 
-    public string SetGeral(bool aguardarRetorno = false)
+    public string SetGeral(
+        ModoFluxo controleFluxo,
+        ModoEntrada modoIdentificacao,
+        bool mudo,
+        int id,
+        bool entradaSentidoHorario,
+        bool exibirRelogio,
+        bool exibirContador,
+        byte duracaoAcionamento,
+        string mensagemPadrao,
+        string mensagemSecundaria,
+        bool aguardarRetorno = false)
     {
+        ControleFluxo = controleFluxo;
+        ModoIdentificacao = modoIdentificacao;
+        Mudo = mudo;
+        Id = id;
+        EntradaSentidoHorario = entradaSentidoHorario;
+        ExibirRelogio = exibirRelogio;
+        ExibirContador = exibirContador;
+        DuracaoAcionamento = duracaoAcionamento;
+        MensagemPadrao = mensagemPadrao;
+        MensagemSecundaria = mensagemSecundaria;
+        
         var config = new Configuracao();
 
         config.Comando = "mcs".ToCharArray();

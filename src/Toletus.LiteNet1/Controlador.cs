@@ -47,8 +47,9 @@ public class Controlador : ControladorBase
         }
     }
 
-    private bool AcharDispositivos(IPAddress faixaIP)
+    public bool AcharDispositivos(IPAddress faixaIP)
     {
+        LiteNets ??= [];
         var udp = new UdpUtils();
         udp.OnRetorno += Udp_OnRetorno;
         udp.Enviar("prc", faixaIP, 1001);
